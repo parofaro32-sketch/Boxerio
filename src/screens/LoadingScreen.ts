@@ -22,49 +22,59 @@ export class LoadingScreen extends Screen {
   show(): void {
     const container = this.container;
     if (!container) return;
-    this.clearContainer();
 
-    this.root = document.createElement('div');
-    this.root.className = 'screen loading-screen';
+    // Reuse the static loading overlay if present so the user never sees a blank screen.
+    const existing = container.querySelector<HTMLElement>('#static-loading');
+    if (existing) {
+      this.root = existing;
+      this.progressBar = this.root.querySelector<HTMLElement>('#static-progress-bar');
+      this.progressText = this.root.querySelector<HTMLElement>('#static-progress-text');
+    } else {
+      this.clearContainer();
+      this.root = document.createElement('div');
+      this.root.className = 'screen loading-screen';
+      this.root.id = 'loading-screen';
 
-    const inner = document.createElement('div');
-    inner.className = 'loading-inner';
+      const inner = document.createElement('div');
+      inner.className = 'loading-inner';
 
-    const title = document.createElement('div');
-    title.className = 'loading-title';
-    title.textContent = 'PREMIUM BOXING';
+      const title = document.createElement('div');
+      title.className = 'loading-title';
+      title.textContent = 'PREMIUM BOXING';
 
-    const subtitle = document.createElement('div');
-    subtitle.className = 'loading-subtitle';
-    subtitle.textContent = 'Initializing engine...';
+      const subtitle = document.createElement('div');
+      subtitle.className = 'loading-subtitle';
+      subtitle.textContent = 'Initializing engine…';
 
-    const track = document.createElement('div');
-    track.className = 'progress-track';
+      const track = document.createElement('div');
+      track.className = 'progress-track';
 
-    this.progressBar = document.createElement('div');
-    this.progressBar.className = 'progress-bar';
+      this.progressBar = document.createElement('div');
+      this.progressBar.className = 'progress-bar';
+      this.progressBar.id = 'static-progress-bar';
 
-    this.progressText = document.createElement('div');
-    this.progressText.className = 'progress-text';
-    this.progressText.textContent = '0%';
+      this.progressText = document.createElement('div');
+      this.progressText.className = 'progress-text';
+      this.progressText.id = 'static-progress-text';
+      this.progressText.textContent = '0%';
 
-    track.appendChild(this.progressBar);
-    inner.appendChild(title);
-    inner.appendChild(subtitle);
-    inner.appendChild(track);
-    inner.appendChild(this.progressText);
-    this.root.appendChild(inner);
-    container.appendChild(this.root);
+      track.appendChild(this.progressBar);
+      inner.appendChild(title);
+      inner.appendChild(subtitle);
+      inner.appendChild(track);
+      inner.appendChild(this.progressText);
+      this.root.appendChild(inner);
+      container.appendChild(this.root);
+    }
 
     this.startTime = performance.now();
     this.animate();
   }
 
   private animate(): void {
-    const duration = this.options.durationMs ?? 1200;
+    const duration = this.options.durationMs ?? 1100;
     const elapsed = performance.now() - this.startTime;
     let p = Math.min(elapsed / duration, 1);
-    // ease out
     p = 1 - Math.pow(1 - p, 3);
 
     const percent = Math.round(p * 100);
@@ -79,7 +89,7 @@ export class LoadingScreen extends Screen {
     }
   }
 
-  hide(): Promise<void> {
+  async hide(): Promise<void> {
     this.completed = true;
     cancelAnimationFrame(this.rafId);
     return new Promise((resolve) => {

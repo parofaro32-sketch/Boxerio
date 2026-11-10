@@ -6,11 +6,24 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#000000" />
   <title>Premium 3D Boxing Game</title>
-  <script type="module" crossorigin src="/assets/index-FNwTpBbp.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DsBwFeGL.css">
+  <script type="module" crossorigin src="/assets/index-wbQZ4MVt.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-6Lh09XJ3.css">
 </head>
 <body>
   <canvas id="graphics-canvas"></canvas>
-  <div id="ui"></div>
+  <div id="ui">
+    <!-- Static loading overlay: visible immediately on page load, before JS executes.
+         The JS LoadingScreen replaces/enhances this once the module loads. -->
+    <div class="screen loading-screen" id="static-loading">
+      <div class="loading-inner">
+        <div class="loading-title">PREMIUM BOXING</div>
+        <div class="loading-subtitle">Initializing engine…</div>
+        <div class="progress-track">
+          <div class="progress-bar" id="static-progress-bar"></div>
+        </div>
+        <div class="progress-text" id="static-progress-text">0%</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
