@@ -1,0 +1,455 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #eaeaea;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#graphics-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #050508;
+}
+
+#ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Base screen */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------- Loading screen ---------- */
+.loading-screen {
+  background: radial-gradient(circle at center, #11131a 0%, #000000 100%);
+  overflow: hidden;
+}
+
+.loading-inner {
+  text-align: center;
+}
+
+.loading-title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
+}
+
+.loading-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #b9c4d6;
+  margin: 0 0 40px 0;
+  opacity: 0.85;
+}
+
+.progress-track {
+  width: clamp(220px, 60vw, 500px);
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ffd23a, #ff6b35);
+  width: 0%;
+  border-radius: 4px;
+  box-shadow: 0 0 18px rgba(255, 107, 53, 0.6);
+  transition: width 0.15s linear;
+}
+
+.progress-text {
+  margin-top: 14px;
+  font-size: clamp(0.95rem, 2vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffd23a;
+}
+
+/* ---------- Main menu ---------- */
+.menu-screen {
+  background: linear-gradient(180deg, #07090f 0%, #000000 100%);
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.menu-title {
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.menu-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #ffd23a;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: clamp(240px, 85vw, 460px);
+}
+
+.menu-btn {
+  width: 100%;
+  padding: clamp(14px, 4vw, 20px) 24px;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(180deg, #1a1d28 0%, #10121a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  padding-left: 28px;
+  transition: transform 0.12s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.menu-btn:active {
+  transform: scale(0.97);
+}
+
+.menu-btn:hover {
+  border-color: rgba(255, 210, 58, 0.5);
+  box-shadow: 0 0 24px rgba(255, 210, 58, 0.15);
+}
+
+.menu-btn-accent {
+  background: linear-gradient(180deg, #ffd23a 0%, #e8b81a 100%);
+  color: #141005;
+  border: none;
+}
+
+.menu-btn-accent:active {
+  transform: scale(0.97);
+}
+
+.menu-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b7280;
+  opacity: 0.7;
+}
+
+/* ---------- Career screen ---------- */
+.career-screen {
+  background: linear-gradient(180deg, #06070d 0%, #000000 100%);
+}
+
+.career-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.career-title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.career-back {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffd23a;
+  background: transparent;
+  border: 1px solid rgba(255, 210, 58, 0.35);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.career-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 110px;
+  padding-bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fighter-form {
+  width: clamp(260px, 88vw, 440px);
+  background: rgba(16, 18, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 28px 24px 24px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b9c4d6;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #eaeaea;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #ffd23a;
+}
+
+.form-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: #8b93a5;
+}
+
+.form-error {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #ff6b6b;
+  font-weight: 700;
+  text-align: center;
+  display: none;
+}
+
+.form-submit {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #141005;
+  background: #ffd23a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.form-submit:active {
+  transform: scale(0.98);
+}
+
+/* Dashboard / profile cards */
+.career-dashboard,
+.career-profile {
+  width: clamp(260px, 88vw, 440px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.fighter-card {
+  width: 100%;
+  background: rgba(16, 18, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 26px 22px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.fighter-name {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  text-shadow: 0 0 18px rgba(255, 210, 58, 0.35);
+}
+
+.fighter-record {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: #b9c4d6;
+  margin: 0 0 18px 0;
+  font-weight: 600;
+}
+
+.fighter-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffd23a;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8b93a5;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.detail-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8b93a5;
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #eaeaea;
+}
+
+.career-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.career-btn {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.2s;
+}
+
+.career-btn:active {
+  transform: scale(0.97);
+}
+
+.career-btn-accent {
+  background: #ffd23a;
+  color: #141005;
+  border: none;
+}
+
+.career-btn-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #b9c4d6;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .fighter-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

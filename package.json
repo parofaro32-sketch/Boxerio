@@ -1,0 +1,20 @@
+{
+  "name": "premium-boxing-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium realistic 3D boxing game built with PlayCanvas and TypeScript",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --noEmit",
+    "preview": "vite preview",
+    "lint": "npx eslint src --ext .ts 2>/dev/null || echo 'eslint not configured'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "playcanvas": "2.24.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}
