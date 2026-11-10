@@ -8,7 +8,21 @@ import { Arena } from './arena';
 let app: App | null = null;
 
 function start(): void {
-  app = new App({ canvasId: 'graphics-canvas' });
+  try {
+    app = new App({ canvasId: 'graphics-canvas' });
+  } catch {
+    // If PlayCanvas fails to initialize, still show the menu so the app is usable.
+    app = null;
+    const menu = document.getElementById('ui');
+    if (menu) {
+      menu.innerHTML = '';
+      const err = document.createElement('div');
+      err.className = 'screen menu-screen';
+      err.innerHTML = '<div style="text-align:center;color:#ff6b6b;font-weight:800;">Engine initialization failed. Check WebGL support.</div>';
+      menu.appendChild(err);
+    }
+    return;
+  }
   // Placeholder cinematic arena background (Phase 2). Realistic arena comes in Phase 5.
   new Arena(app.app);
 
